@@ -1,0 +1,17 @@
+Instalacion
+NodeJS
+Angular
+pnpm
+
+
+--Poyecto Angular--
+
+1 Debo crear servicios => services
+    Se crea con ng g service Nombre_servicio
+    Creamos para usar la librería httpclient para poder conectarme a la ruta controllers/proveedores.controllers.php pasando 
+    variable OP
+
+    También crearemos interfaces que son las que necesito para mostrar información.
+    Estas serán como un objeto
+    Se creasn los servicios con la estructura de directorio similar a la de interfaces
+    En el servicio creado decalro una librería tipo httpclient para conectarme al controlador (?)
