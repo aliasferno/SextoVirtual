@@ -18,7 +18,7 @@ var init = () => {
       console.log(listaPeliculas);
       listaPeliculas = JSON.parse(listaPeliculas);
       console.log(listaPeliculas);
-      $.each(listaActores, (index, pelicula) => {
+      $.each(listaPeliculas, (index, pelicula) => {
         html += `<tr>
                   <td>${pelicula.pelicula_id}</td>
                   <td>${pelicula.titulo}</td>
