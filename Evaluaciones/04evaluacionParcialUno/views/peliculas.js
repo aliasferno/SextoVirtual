@@ -56,9 +56,6 @@ var init = () => {
           var anio = $("#anioac").val(data.anio);
           var director = $("#directorac").val(data.director);
 
-          
-          
-          console.log(data);
         });
     }
 
