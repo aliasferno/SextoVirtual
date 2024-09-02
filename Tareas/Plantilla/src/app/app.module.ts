@@ -11,10 +11,20 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoproveedor.component';
+import { ClientesComponent } from './clientes/clientes.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, BrowserAnimationsModule, ProveedoresComponent, HttpClientModule, FormsModule, ReactiveFormsModule, NuevoproveedorComponent],
+  imports: [BrowserModule, 
+    AppRoutingModule, 
+    SharedModule, 
+    BrowserAnimationsModule, 
+    ProveedoresComponent, 
+    HttpClientModule, 
+    FormsModule, 
+    ReactiveFormsModule, 
+    NuevoproveedorComponent,
+    ClientesComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
