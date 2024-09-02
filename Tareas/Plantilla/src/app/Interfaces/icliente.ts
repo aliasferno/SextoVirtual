@@ -1,4 +1,4 @@
-export interface Icliente {
+export interface ICliente {
     idClientes:number;
     Nombres:string;
     Direccion:string;

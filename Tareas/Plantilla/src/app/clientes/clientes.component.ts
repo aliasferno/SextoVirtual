@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { Icliente } from '../Interfaces/icliente';
+import { ICliente } from '../Interfaces/icliente';
 import { ClienteService } from '../Services/clientes.service';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ClientesComponent {
   title = 'Lista de Clientes';
-  listaClientes:Icliente[] = [];
+  listaClientes:ICliente[] = [];
 
   constructor(private ServicioCliente:ClienteService){}
   ngOnInit(){

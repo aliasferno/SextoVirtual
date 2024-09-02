@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Icliente } from '../Interfaces/icliente';
+import { ICliente } from '../Interfaces/icliente';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,17 +9,17 @@ import { Observable } from 'rxjs';
 export class ClienteService {
 
   apiurl = 'http://localhost/SextoVirtual/Tareas/CRUD_tienda/controllers/clientes.controller.php?op=';
-  prove:Icliente[] = [];
+  prove:ICliente[] = [];
   constructor(private lector: HttpClient) { }
 
-  todos():Observable<Icliente[]>{
-    return this.lector.get<Icliente[]>(this.apiurl + 'todos');
+  todos():Observable<ICliente[]>{
+    return this.lector.get<ICliente[]>(this.apiurl + 'todos');
   }
 
-  uno(idClientes:number):Observable<Icliente>{
+  uno(idClientes:number):Observable<ICliente>{
     const formulario = new FormData();
     formulario.append('idClientes', idClientes.toString());
-    return this.lector.post<Icliente>(this.apiurl + 'uno',formulario)
+    return this.lector.post<ICliente>(this.apiurl + 'uno',formulario)
 
   }
 
@@ -30,7 +30,7 @@ export class ClienteService {
 
   }
 
-  insertar(cliente: Icliente):Observable<string>{
+  insertar(cliente: ICliente):Observable<string>{
 
     const formulario = new FormData();
 
@@ -43,7 +43,7 @@ export class ClienteService {
     return this.lector.post<string>(this.apiurl + 'insertar', formulario);
   }
 
-  actualizar(cliente: Icliente):Observable<string>{
+  actualizar(cliente: ICliente):Observable<string>{
 
     const formulario = new FormData();
     formulario.append('idClientes', cliente.idClientes.toString());

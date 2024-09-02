@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Route, Router, Routes } from '@angular/router';
-import { Icliente } from 'src/app/Interfaces/icliente';
+import { ICliente } from 'src/app/Interfaces/icliente';
 import { ClienteService } from 'src/app/Services/clientes.service';
 
 @Component({
@@ -46,7 +46,7 @@ export class NuevoclienteComponent implements OnInit {
     }
   }
   grabar(){
-    let icliente:Icliente= {
+    let ICliente:ICliente= {
       idClientes:0,
       Nombres:this.Nombres,
       Direccion:this.Direccion,
@@ -57,7 +57,7 @@ export class NuevoclienteComponent implements OnInit {
 
     if(this.idClientes == 0 || isNaN(this.idClientes)){
 
-    this.clienteServicio.insertar(icliente).subscribe(
+    this.clienteServicio.insertar(ICliente).subscribe(
       (respuesta)=>{
           // parseInt(respuesta) > 1 ? alert("Grabado con éxito"): alert("Error al grabar");
 
@@ -70,8 +70,8 @@ export class NuevoclienteComponent implements OnInit {
       }
     );
   }else{
-    icliente.idClientes = this.idClientes;
-    this.clienteServicio.actualizar(icliente).subscribe(
+    ICliente.idClientes = this.idClientes;
+    this.clienteServicio.actualizar(ICliente).subscribe(
       (respuesta)=>{
         if(parseInt(respuesta)> 0){
           this.idClientes = 0;
