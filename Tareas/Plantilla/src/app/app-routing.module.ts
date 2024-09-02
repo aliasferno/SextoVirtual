@@ -57,7 +57,11 @@ const routes: Routes = [
       {
         path: 'editarcliente/:id',
         loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent)
-      }
+      },
+      {
+        path: 'facturas',
+        loadComponent: () => import('./facturas/facturas.component').then((m) => m.FacturasComponent)
+      },
     ]
   },
   {
