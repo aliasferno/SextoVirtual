@@ -87,6 +87,22 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'bg-colors'
       },
       {
+        id: 'facturas',
+        title: 'Facturas',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/facturas',
+        icon: 'bg-colors'
+      },
+      {
+        id: 'tabler',
+        title: 'Unidad de Medida',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/unidadmedida',
+        icon: 'ant-design'
+      },
+      {
         id: 'tabler',
         title: 'Tabler',
         type: 'item',

@@ -7,6 +7,7 @@ import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.compon
 import { GuestComponent } from './theme/layouts/guest/guest.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoproveedor.component';
+import { usuariosGuardGuard } from './Guards/usuarios-guard.guard';
 
 const routes: Routes = [
   {
@@ -71,6 +72,23 @@ const routes: Routes = [
         loadComponent: () => import('./facturas/nuevafactura/nuevafactura.component').then((m) => m.NuevafacturaComponent),
         
       },
+      {
+        path: 'unidadmedida',
+        loadComponent: () => import('./unidadmedida/unidadmedida.component').then((m) => m.UnidadmedidaComponent),
+        // canActivate: [usuariosGuardGuard]
+      },
+      {
+        path: 'nuevaunidadmedida',
+        loadComponent: () =>
+          import('./unidadmedida/nuevaunidadmedida/nuevaunidadmedida.component').then((m) => m.NuevaunidadmedidaComponent),
+        // canActivate: [usuariosGuardGuard]
+      },
+      {
+        path: 'editarunidadmedida/:id',
+        loadComponent: () =>
+          import('./unidadmedida/nuevaunidadmedida/nuevaunidadmedida.component').then((m) => m.NuevaunidadmedidaComponent),
+        // canActivate: [usuariosGuardGuard]
+      }
       
     ]
   },
