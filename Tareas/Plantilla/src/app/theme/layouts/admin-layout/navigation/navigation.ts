@@ -104,6 +104,14 @@ export const NavigationItems: NavigationItem[] = [
       },
       {
         id: 'tabler',
+        title: 'Productos',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/productos',
+        icon: 'ant-design'
+      },
+      {
+        id: 'tabler',
         title: 'Tabler',
         type: 'item',
         classes: 'nav-item',

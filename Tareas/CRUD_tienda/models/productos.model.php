@@ -9,7 +9,23 @@ class Productos
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `productos`";
+        $cadena = "SELECT p.idProductos, 
+        p.Codigo_Barras, 
+        p.Nombre_Producto, 
+        p.Graba_IVA, 
+        u.Detalle as Unidad_Medida, 
+        i.Detalle as IVA_Detalle, 
+        k.Cantidad, 
+        k.Fecha_Transaccion, 
+        k.Valor_Compra, 
+        k.Valor_Venta, 
+        k.Tipo_Transaccion
+            FROM `Productos` p
+            INNER JOIN `IVA` i ON p.Graba_IVA = i.idIVA
+            INNER JOIN `Kardex` k ON p.idProductos = k.Productos_idProductos
+            INNER JOIN `Unidad_Medida` u ON k.Unidad_Medida_idUnidad_Medida = u.idUnidad_Medida
+            where k.`Estado` = 1
+            ";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
@@ -19,20 +35,57 @@ class Productos
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `productos` WHERE `idProductos`=$idProductos";
+        $cadena = "SELECT p.*
+                   FROM `Productos` p
+                   WHERE p.idProductos = $idProductos";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
     }
 
-    public function insertar($Codigo_Barras, $Nombre_Producto, $Graba_Iva) //insert into clientes (nombre, direccion, telefono) values ($nombre, $direccion, $telefono)
+    public function insertar($Codigo_Barras, $Nombre_Producto, $Graba_IVA, $Unidad_Medida_idUnidad_Medida, $IVA_idIVA, $Cantidad, $Valor_Compra, $Valor_Venta, $Proveedores_idProveedores)
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "INSERT INTO `productos` ( `Codigo_Barras`, `Nombre_Producto`, `Graba_Iva`) VALUES ('$Codigo_Barras','$Nombre_Producto','$Graba_Iva')";
+
+            // Insertar el producto
+            $cadenaProducto = "INSERT INTO `Productos`(`Codigo_Barras`, `Nombre_Producto`, `Graba_IVA`) 
+                               VALUES ('$Codigo_Barras', '$Nombre_Producto', '$Graba_IVA')";
+
+            if (mysqli_query($con, $cadenaProducto)) {
+                $productoId = $con->insert_id; // Obtener el ID del producto recién creado
+
+                // Insertar el Kardex asociado al producto
+                $cadenaKardex = "INSERT INTO `Kardex`(`Estado`, `Fecha_Transaccion`, `Cantidad`, `Valor_Compra`, `Valor_Venta`, `Unidad_Medida_idUnidad_Medida`, `Unidad_Medida_idUnidad_Medida1`, `Unidad_Medida_idUnidad_Medida2`, `IVA`, `IVA_idIVA`, `Proveedores_idProveedores`, `Productos_idProductos`, `Tipo_Transaccion`)
+                                 VALUES (1, NOW(), '$Cantidad', '$Valor_Compra', '$Valor_Venta', '$Unidad_Medida_idUnidad_Medida', '$Unidad_Medida_idUnidad_Medida', '$Unidad_Medida_idUnidad_Medida', '$IVA_idIVA', '$IVA_idIVA', '$Proveedores_idProveedores', '$productoId', 1)";
+
+                if (mysqli_query($con, $cadenaKardex)) {
+                    return $productoId; // Éxito, devolver el ID del producto
+                } else {
+                    return $con->error; // Error en el Kardex
+                }
+            } else {
+                return $con->error; // Error en el producto
+            }
+        } catch (Exception $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
+    }
+    public function actualizar($idProductos, $Codigo_Barras, $Nombre_Producto, $Graba_IVA) // update productos set ... where id = $idProductos
+    {
+        try {
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+            $cadena = "UPDATE `Productos` SET 
+                       `Codigo_Barras`='$Codigo_Barras',
+                       `Nombre_Producto`='$Nombre_Producto',
+                       `Graba_IVA`='$Graba_IVA'
+                       WHERE `idProductos` = $idProductos";
             if (mysqli_query($con, $cadena)) {
-                return $con->insert_id;
+                return $idProductos; // Éxito, devolver el ID actualizado
             } else {
                 return $con->error;
             }
@@ -42,31 +95,14 @@ class Productos
             $con->close();
         }
     }
-    public function actualizar($idProductos, $Codigo_Barras, $Nombre_Producto, $Graba_Iva) //update provedores set nombre = $nombre, direccion = $direccion, telefono = $telefono where id = $id
+    public function eliminar($idProductos) // delete from productos where id = $idProductos
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "UPDATE `productos` SET `Codigo_Barras`='$Codigo_Barras',`Nombre_Producto`='$Nombre_Producto',`Graba_Iva`='$Graba_Iva' WHERE `idProductos` = $idProductos";
+            $cadena = "UPDATE `kardex` SET `Estado`=0 WHERE `Productos_idProductos`=$idProductos";
             if (mysqli_query($con, $cadena)) {
-                return $idProductos;
-            } else {
-                return $con->error;
-            }
-        } catch (Exception $th) {
-            return $th->getMessage();
-        } finally {
-            $con->close();
-        }
-    }
-    public function eliminar($idProductos) //delete from provedores where id = $id
-    {
-        try {
-            $con = new ClaseConectar();
-            $con = $con->ProcedimientoParaConectar();
-            $cadena = "DELETE FROM `productos` WHERE `idProductos`= $idProductos";
-            if (mysqli_query($con, $cadena)) {
-                return 1;
+                return 1; // Éxito
             } else {
                 return $con->error;
             }
