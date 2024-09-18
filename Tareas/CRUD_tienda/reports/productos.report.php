@@ -5,6 +5,12 @@ require('../config/config.php');
 
 $pdf = new FPDF();
 $pdf->AddPage();
-$pdf->SetFont('Arial','B',16);
-$pdf->Cell(40, 10, iconv('UTF-8', 'windows-1252', 'Habla ñaño'));
-$pdf->Output();
+
+
+//encabezado
+// x y texto
+$pdf->SetFont('Arial','B',12);
+$pdf->Text(30, 10, 'Title');
+
+//Line break
+
