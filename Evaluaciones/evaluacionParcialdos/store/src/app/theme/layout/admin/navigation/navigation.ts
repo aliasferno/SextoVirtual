@@ -111,7 +111,31 @@ const NavigationItems = [
         url: '/tables/bootstrap',
         classes: 'nav-item',
         icon: 'feather icon-server'
-      }
+      },
+      {
+        id: 'clientes',
+        title: 'Clientes',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/clientes',
+        icon: 'feather icon-server'
+      },
+      {
+        id: 'tabler',
+        title: 'Productos',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/productos',
+        icon: 'ant-feather icon-book'
+      },
+      {
+        id: 'tabler',
+        title: 'Compras',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/compras',
+        icon: 'ant-feather icon-book'
+      },
     ]
   },
   {

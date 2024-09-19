@@ -22,6 +22,37 @@ const routes: Routes = [
         loadComponent: () => import('./clientes/clientes.component').then((m) => m.ClientesComponent)
       },
       {
+        path: 'nuevocliente',
+        loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent)
+      },
+      {
+        path: 'editarcliente/:id',
+        loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent)
+      },
+      {
+        path: 'productos',
+        loadComponent: () => import('./productos/productos.component').then((m) => m.ProductosComponent),
+       
+      },
+      {
+        path: 'nuevoproducto',
+        loadComponent: () => import('./productos/nuevoproducto/nuevoproducto.component').then((m) => m.NuevoproductoComponent)
+      },
+      {
+        path: 'editarproducto/:id',
+        loadComponent: () => import('./productos/nuevoproducto/nuevoproducto.component').then((m) => m.NuevoproductoComponent)
+      },
+      {
+        path: 'compras',
+        loadComponent: () => import('./compras/compras.component').then((m) => m.ComprasComponent),
+       
+      },
+      {
+        path: 'nuevacompra',
+        loadComponent: () => import('./compras/nuevacompra/nuevacompra.component').then((m) => m.NuevacompraComponent),
+       
+      },
+      {
         path: 'basic',
         loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then((m) => m.UiBasicModule)
       },

@@ -8,7 +8,7 @@ class Producto
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM productos";
+        $cadena = "SELECT * FROM productos WHERE estado = 1";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
@@ -20,7 +20,8 @@ class Producto
         $con = $con->ProcedimientoParaConectar();
         $cadena = "SELECT *
                    FROM `productos` 
-                   WHERE producto_id = $idProductos";
+                   WHERE producto_id = $idProductos
+                   AND estado = 1";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
@@ -35,6 +36,11 @@ class Producto
             // Insertar el producto
             $cadenaProducto = "INSERT INTO `productos`(`nombre`, `talla`, `color`, `precio`, `estado`) 
                                VALUES ('$Nombre', '$Talla', '$Color', '$Precio', '$Estado')";
+            if (mysqli_query($con, $cadenaProducto)) {
+                return $con->insert_id;
+            } else {
+                return $con->error;
+            }
         } catch (Exception $th) {
             return $th->getMessage();
         } finally {

@@ -51,10 +51,10 @@ export class ClienteService {
 
     const formulario = new FormData();
     formulario.append('idClientes', cliente.cliente_id.toString());
-    formulario.append('Nombres', cliente.nombre);
-    formulario.append('Direccion', cliente.apellido);
-    formulario.append('Telefono', cliente.email);
-    formulario.append('Cedula', cliente.telefono);
+    formulario.append('Nombre', cliente.nombre);
+    formulario.append('Apellido', cliente.apellido);
+    formulario.append('Email', cliente.email);
+    formulario.append('Telefono', cliente.telefono);
 
     return this.lector.post<string>(this.apiurl + 'actualizar', formulario);
   }
